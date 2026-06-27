@@ -106,7 +106,7 @@
       <button onClick="{{ go.frames }}" style="{{ navStyles.frames }}"><span class="ms" style="font-size:18px;">filter_frames</span>Frames</button>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;min-width:160px;justify-content:flex-end;">
-      <button style="display:flex;align-items:center;gap:7px;padding:9px 16px 9px 12px;border:none;border-radius:50px;background:#2b2724;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;box-shadow:0 6px 16px rgba(43,39,36,.22);"><span class="ms" style="font-size:18px;">cloud_done</span>Saved</button>
+      <button onClick="{{ go.saved }}" style="{{ savedBtnStyle }}"><span class="ms" style="font-size:18px;">cloud_done</span>Saved<sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ false }}"><span style="{{ galleryBadgeStyle }}">{{ galleryCount }}</span></sc-if></button>
     </div>
   </header>
 
@@ -139,7 +139,7 @@
 
     <!-- VARIANT A: floating dock + side panel -->
     <sc-if value="{{ camA }}" hint-placeholder-val="{{ true }}">
-    <div style="display:grid;grid-template-columns:1fr 240px;gap:18px;align-items:start;">
+    <div style="display:grid;grid-template-columns:minmax(0,{{ camColW }}) {{ previewColW }};gap:18px;align-items:start;justify-content:center;">
       <div style="position:relative;border-radius:28px;overflow:hidden;background:#1a1714;aspect-ratio:{{ camAR }};box-shadow:0 24px 60px rgba(43,39,36,.22);border:1px solid rgba(43,39,36,.06);">
         <video ref="{{ videoRef }}" autoplay muted playsinline style="{{ camStyle }}"></video>
         <div onClick="{{ enableCam }}" style="{{ camPlaceholderStyle }}"><span class="ms" style="font-size:54px;color:rgba(255,255,255,.5);">videocam</span><div style="color:rgba(255,255,255,.66);font-size:14px;margin-top:10px;font-weight:500;max-width:300px;text-align:center;line-height:1.5;cursor:pointer;">{{ camErrorText }}</div></div>
@@ -181,7 +181,7 @@
 
     <!-- VARIANT B: left vertical rail -->
     <sc-if value="{{ camB }}" hint-placeholder-val="{{ true }}">
-    <div style="display:grid;grid-template-columns:84px 1fr 280px;gap:22px;align-items:start;">
+    <div style="display:grid;grid-template-columns:84px minmax(0,{{ camColW }}) {{ previewColW }};gap:22px;align-items:start;justify-content:center;">
       <div style="display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);border-radius:24px;padding:18px 0;border:1px solid rgba(43,39,36,.05);box-shadow:0 10px 30px rgba(43,39,36,.06);">
         <button onClick="{{ toggle.timer }}" style="position:relative;width:48px;height:48px;border:none;border-radius:15px;background:rgba(43,39,36,.05);color:#5a544c;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:22px;">timer</span><span style="position:absolute;bottom:3px;right:5px;font-size:9px;font-weight:800;">{{ timerLabel }}</span></button>
         <button onClick="{{ toggle.flash }}" style="width:48px;height:48px;border:none;border-radius:15px;background:rgba(43,39,36,.05);color:#5a544c;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span class="ms" style="font-size:22px;">{{ flashIcon }}</span></button>
@@ -214,9 +214,9 @@
 
     <!-- VARIANT C: minimal -->
     <sc-if value="{{ camC }}" hint-placeholder-val="{{ true }}">
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start;justify-items:center;">
+    <div style="display:grid;grid-template-columns:minmax(0,{{ camColW }}) {{ previewColW }};gap:28px;align-items:start;justify-items:center;justify-content:center;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:24px;width:100%;">
-      <div style="position:relative;width:100%;max-width:860px;border-radius:30px;overflow:hidden;background:#1a1714;aspect-ratio:{{ camAR }};box-shadow:0 30px 70px rgba(43,39,36,.24);border:1px solid rgba(43,39,36,.06);">
+      <div style="position:relative;width:100%;max-width:{{ camColW }};border-radius:30px;overflow:hidden;background:#1a1714;aspect-ratio:{{ camAR }};box-shadow:0 30px 70px rgba(43,39,36,.24);border:1px solid rgba(43,39,36,.06);">
         <video ref="{{ videoRef }}" autoplay muted playsinline style="{{ camStyle }}"></video>
         <div onClick="{{ enableCam }}" style="{{ camPlaceholderStyle }}"><span class="ms" style="font-size:54px;color:rgba(255,255,255,.5);">videocam</span><div style="color:rgba(255,255,255,.66);font-size:14px;margin-top:10px;font-weight:500;max-width:300px;text-align:center;line-height:1.5;cursor:pointer;">{{ camErrorText }}</div></div>
         <div style="{{ gridOverlayStyle }}"></div><div style="{{ flashStyle }}"></div><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ dustStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ hujiStampStyle }}">{{ hujiDateStr }}</div><div style="{{ countdownStyle }}"><span style="{{ countNumStyle }}">{{ countdown }}</span><button onClick="{{ stopCountdown }}" style="display:flex;align-items:center;gap:7px;padding:11px 22px;border:none;border-radius:50px;background:rgba(255,255,255,.92);color:#2b2724;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3);"><span class="ms" style="font-size:19px;">stop_circle</span>Stop</button></div>
@@ -320,17 +320,6 @@
           </div>
         </div>
         </sc-if>
-      </div>
-
-      <!-- TEXT & CAPTION -->
-      <div style="background:rgba(255,255,255,.78);backdrop-filter:blur(18px);border-radius:22px;padding:18px 20px;border:1px solid rgba(43,39,36,.05);box-shadow:0 8px 28px rgba(43,39,36,.06);">
-        <div style="margin-bottom:13px;"><span style="font-size:14px;font-weight:700;">Text & Caption</span></div>
-        <textarea onChange="{{ onCaption }}" placeholder="Add a caption…" style="width:100%;padding:12px 14px;border:1.5px solid rgba(43,39,36,.1);border-radius:14px;background:#fff;font-family:inherit;font-size:14px;color:#2b2724;resize:none;height:60px;box-sizing:border-box;outline:none;transition:border .18s;display:block;">{{ caption }}</textarea>
-        <div style="display:flex;gap:7px;margin-top:11px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
-          <sc-for list="{{ fonts }}" as="fnt" hint-placeholder-count="0">
-            <button onClick="{{ fnt.onClick }}" style="{{ fnt.style }}">{{ fnt.label }}</button>
-          </sc-for>
-        </div>
       </div>
 
     <!-- ======= END CAMERA BOTTOM PANEL ======= -->
@@ -546,9 +535,7 @@
         <div style="position:absolute;top:-15px;left:50%;transform:translateX(-50%) rotate(-2deg);width:96px;height:30px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 2px,transparent 2px 5px),linear-gradient(180deg,rgba(222,210,186,.78),rgba(204,190,160,.66));box-shadow:0 2px 6px rgba(0,0,0,.08);"></div>
         <div style="width:340px;background:#fff;padding:18px 18px 30px;border-radius:4px;box-shadow:0 24px 50px rgba(43,39,36,.18);">
           <div style="aspect-ratio:1;border-radius:2px;background:linear-gradient(160deg,#f3c9a0,#e08a63 72%,#9c5f4a);"></div>
-          <div style="text-align:center;margin-top:18px;min-height:42px;display:flex;align-items:center;justify-content:center;"><span style="{{ captionStyle }}">{{ caption }}</span></div>
-          <sc-if value="{{ showDate }}" hint-placeholder-val="{{ true }}"><div style="text-align:center;font-family:'Courier New',monospace;font-size:12px;color:#a89f92;letter-spacing:.1em;margin-top:8px;">{{ liveDateStr }}</div></sc-if>
-          <sc-if value="{{ showLoc }}" hint-placeholder-val="{{ true }}"><div style="text-align:center;font-size:11.5px;color:#b6ad9f;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:4px;"><span class="ms" style="font-size:13px;">location_on</span>{{ locText }}</div></sc-if>
+          <sc-if value="{{ showDate }}" hint-placeholder-val="{{ true }}"><div style="text-align:center;font-family:'Courier New',monospace;font-size:12px;color:#a89f92;letter-spacing:.1em;margin-top:18px;">{{ liveDateStr }}</div></sc-if>
         </div>
       </div>
 
@@ -567,21 +554,9 @@
     </div>
     <aside style="background:rgba(255,255,255,.78);backdrop-filter:blur(16px);border-radius:24px;padding:24px;border:1px solid rgba(43,39,36,.05);box-shadow:0 14px 36px rgba(43,39,36,.07);">
       <h2 style="font-size:17px;font-weight:700;margin-bottom:16px;">Text Editor</h2>
-      <label style="font-size:12px;font-weight:600;color:#9b958c;letter-spacing:.04em;">CAPTION</label>
-      <input value="{{ caption }}" onChange="{{ onCaption }}" placeholder="Write a caption…" style="width:100%;margin-top:8px;margin-bottom:20px;padding:13px 15px;border:1.5px solid rgba(43,39,36,.1);border-radius:14px;font-family:inherit;font-size:14px;color:#2b2724;background:#fff;outline:none;">
-      <label style="font-size:12px;font-weight:600;color:#9b958c;letter-spacing:.04em;">FONT STYLE</label>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px;margin-bottom:20px;">
-        <sc-for list="{{ fonts }}" as="ft" hint-placeholder-count="5"><button onClick="{{ ft.onClick }}" style="{{ ft.style }}">{{ ft.label }}</button></sc-for>
-      </div>
       <label style="font-size:12px;font-weight:600;color:#9b958c;letter-spacing:.04em;">ADD-ONS</label>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
         <button onClick="{{ toggleDate }}" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border:1.5px solid {{ showDate ? 'rgba(176,125,94,.35)' : 'rgba(43,39,36,.1)' }};border-radius:14px;background:{{ showDate ? 'rgba(176,125,94,.08)' : '#fff' }};cursor:pointer;font-family:inherit;transition:all .18s;"><span style="display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:{{ showDate ? '#b07d5e' : '#5a544c' }};"><span class="ms" style="font-size:18px;">calendar_today</span>Date & Time</span><span class="ms" style="font-size:20px;color:{{ showDate ? '#b07d5e' : '#c9bfb2' }};">{{ showDate ? 'toggle_on' : 'toggle_off' }}</span></button>
-        <button onClick="{{ toggleLoc }}" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border:1.5px solid {{ showLoc ? 'rgba(176,125,94,.35)' : 'rgba(43,39,36,.1)' }};border-radius:14px;background:{{ showLoc ? 'rgba(176,125,94,.08)' : '#fff' }};cursor:pointer;font-family:inherit;transition:all .18s;"><span style="display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:{{ showLoc ? '#b07d5e' : '#5a544c' }};"><span class="ms" style="font-size:18px;">location_on</span>Location</span><span class="ms" style="font-size:20px;color:{{ showLoc ? '#b07d5e' : '#c9bfb2' }};">{{ showLoc ? 'toggle_on' : 'toggle_off' }}</span></button>
-        <div style="display:flex;gap:8px;align-items:stretch;">
-          <input value="{{ locText }}" onChange="{{ onLoc }}" placeholder="City, State" style="flex:1;min-width:0;padding:11px 14px;border:1.5px solid rgba(43,39,36,.1);border-radius:14px;background:#fff;font-family:inherit;font-size:13.5px;color:#2b2724;outline:none;">
-          <button onClick="{{ detectLoc }}" style="display:flex;align-items:center;gap:6px;padding:0 14px;border:1.5px solid rgba(176,125,94,.35);border-radius:14px;background:rgba(176,125,94,.08);color:#b07d5e;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .18s;"><span class="ms" style="font-size:17px;">my_location</span>{{ locDetectLabel }}</button>
-        </div>
-        <div style="display:flex;align-items:center;gap:9px;padding:13px 16px;border:1.5px solid rgba(43,39,36,.1);border-radius:14px;font-size:13.5px;font-weight:600;color:#5a544c;"><span class="ms" style="font-size:18px;">edit_note</span>Custom message</div>
       </div>
     </aside>
   </main>
@@ -619,9 +594,7 @@
             <sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div><div style="{{ hujiStampStyle }}">{{ hujiDateStr }}</div></sc-if>
           </div>
           <div style="padding:8px 4px 0;min-height:20px;text-align:center;">
-            <sc-if value="{{ showCaption }}" hint-placeholder-val="{{ false }}"><div style="font-family:'Caveat',cursive;font-size:17px;color:{{ frameCap }};line-height:1.3;margin-bottom:2px;">{{ caption }}</div></sc-if>
             <sc-if value="{{ showDate }}" hint-placeholder-val="{{ false }}"><div style="font-size:10.5px;font-weight:600;color:{{ frameCap }};opacity:.68;margin-top:3px;">{{ exportDateStr }}</div></sc-if>
-            <sc-if value="{{ showLoc }}" hint-placeholder-val="{{ false }}"><div style="font-size:10.5px;font-weight:600;color:{{ frameCap }};opacity:.68;margin-top:2px;">📍 {{ locText }}</div></sc-if>
           </div>
         </div>
         <div style="margin-top:12px;display:flex;gap:8px;">
@@ -690,19 +663,11 @@
           </div>
           </sc-if>
         </div>
-        <!-- Text editor -->
+        <!-- Date stamp -->
         <div style="background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-radius:20px;padding:16px 18px;border:1px solid rgba(43,39,36,.05);box-shadow:0 6px 22px rgba(43,39,36,.06);">
-          <div style="margin-bottom:11px;"><span style="font-size:13.5px;font-weight:700;">Text & Caption</span></div>
-          <textarea onChange="{{ onCaption }}" placeholder="Add a caption…" style="width:100%;padding:11px 13px;border:1.5px solid rgba(43,39,36,.1);border-radius:12px;background:#fff;font-family:inherit;font-size:13.5px;color:#2b2724;resize:none;height:58px;box-sizing:border-box;outline:none;display:block;">{{ caption }}</textarea>
-          <div style="display:flex;gap:7px;margin-top:10px;overflow-x:auto;scrollbar-width:none;">
-            <sc-for list="{{ fonts }}" as="fnt" hint-placeholder-count="0">
-              <button onClick="{{ fnt.onClick }}" style="{{ fnt.style }}">{{ fnt.label }}</button>
-            </sc-for>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-            <button onClick="{{ toggleCaption }}" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:1.5px solid rgba(43,39,36,.1);background:{{ showCaption ? '#2b2724' : '#fff' }};font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;color:{{ showCaption ? '#fff' : '#5a544c' }};transition:all .18s;"><span class="ms" style="font-size:15px;">title</span>Caption</button>
+          <div style="margin-bottom:11px;"><span style="font-size:13.5px;font-weight:700;">Date Stamp</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <button onClick="{{ toggleDate }}" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:1.5px solid rgba(43,39,36,.1);background:{{ showDate ? '#2b2724' : '#fff' }};font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;color:{{ showDate ? '#fff' : '#5a544c' }};transition:all .18s;"><span class="ms" style="font-size:15px;">calendar_today</span>Date</button>
-            <button onClick="{{ toggleLoc }}" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;border:1.5px solid rgba(43,39,36,.1);background:{{ showLoc ? '#2b2724' : '#fff' }};font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;color:{{ showLoc ? '#fff' : '#5a544c' }};transition:all .18s;"><span class="ms" style="font-size:15px;">location_on</span>Location</button>
           </div>
         </div>
       </div>
@@ -722,6 +687,52 @@
         </div>
       </aside>
     </div>
+  </main>
+  </sc-if>
+
+  <!-- ============ SAVED ============ -->
+  <sc-if value="{{ show.saved }}" hint-placeholder-val="{{ true }}">
+  <main style="padding:30px 36px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px;">
+      <div>
+        <h1 style="font-family:'Playfair Display',serif;font-size:34px;font-weight:600;margin-bottom:6px;">Your Saved Photos</h1>
+        <p style="font-size:14.5px;color:#9b958c;">{{ galleryCountLabel }} · stored on this device. Every print you make lands here.</p>
+      </div>
+      <sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ clearGallery }}" style="display:flex;align-items:center;gap:7px;padding:11px 18px;border:1.5px solid rgba(43,39,36,.12);border-radius:14px;background:rgba(255,255,255,.9);color:#9b5a52;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;"><span class="ms" style="font-size:18px;">delete_sweep</span>Clear all</button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ galleryEmpty }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 20px;background:rgba(255,255,255,.7);border:1.5px dashed rgba(43,39,36,.14);border-radius:24px;">
+        <span class="ms" style="font-size:54px;color:#c9bfb2;margin-bottom:14px;">photo_library</span>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;margin-bottom:6px;">No saved photos yet</div>
+        <p style="font-size:14px;color:#9b958c;max-width:340px;margin-bottom:20px;">Snap or upload a photo, style it, then hit Save or Download — your prints are kept here automatically.</p>
+        <button onClick="{{ go.camera }}" style="display:flex;align-items:center;gap:8px;padding:13px 24px;border:none;border-radius:50px;background:#2b2724;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(43,39,36,.22);"><span class="ms" style="font-size:19px;">photo_camera</span>Take a photo</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:22px;">
+        <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="0">
+          <div style="background:#fff;border-radius:16px;padding:12px;box-shadow:0 12px 30px rgba(43,39,36,.1);border:1px solid rgba(43,39,36,.05);display:flex;flex-direction:column;">
+            <div style="position:relative;border-radius:10px;overflow:hidden;background:#f1ece4;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+              <img sc-attr-src="{{ g.src }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:11px;gap:8px;">
+              <div style="min-width:0;">
+                <div style="font-size:13px;font-weight:700;color:#2b2724;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ g.label }}</div>
+                <div style="font-size:11px;color:#9b958c;">{{ g.date }}</div>
+              </div>
+              <div style="display:flex;gap:6px;flex:none;">
+                <button onClick="{{ g.onDownload }}" title="Download" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:none;border-radius:11px;background:#2b2724;color:#fff;cursor:pointer;"><span class="ms" style="font-size:18px;">download</span></button>
+                <button onClick="{{ g.onDelete }}" title="Delete" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(43,39,36,.1);border-radius:11px;background:#fff;color:#9b5a52;cursor:pointer;"><span class="ms" style="font-size:18px;">delete</span></button>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
   </main>
   </sc-if>
 
@@ -797,8 +808,9 @@ class Component extends DCLogic {
     selectedFilter:'Original', selectedFrame:'Classic White', selectedCamera:null, frameColor:null,
     adj:{ brightness:100, contrast:100, saturation:100, exposure:100, temperature:0, blur:0, grain:0 },
     leak:'None', vignette:false, huji:false, dust:false, activeCam:'', sampleFrame:null, showWelcome:true,
-    font:'serif', caption:'sun-drenched mornings', showDate:true, showLoc:true, locText:'New York, NY', locDetecting:false,
-    fmt:'PNG', quality:'HD', paper:'Instax Mini', uploadedPhoto:null, showCaption:false,
+    showDate:true,
+    gallery:(()=>{try{return JSON.parse(localStorage.getItem('photoism-gallery'))||[]}catch(e){return []}})(),
+    fmt:'PNG', quality:'HD', paper:'Instax Mini', uploadedPhoto:null,
     dark:(()=>{try{return localStorage.getItem('photoism-dark')==='1'}catch(e){return false}})(),
     studioEntrance:true,
     reviews:null, rvName:'', rvText:'', rvRating:0, rvHover:0, rvDone:false
@@ -812,7 +824,13 @@ class Component extends DCLogic {
     Moody:'contrast(1.18) saturate(.82) brightness(.93)', 'Teal Orange':'contrast(1.1) saturate(1.3) hue-rotate(-6deg)', 'Golden Hour':'sepia(.3) saturate(1.4) brightness(1.06) hue-rotate(-10deg)', Dreamy:'contrast(.9) brightness(1.1) saturate(1.15)',
     VHS:'saturate(1.5) contrast(1.1) hue-rotate(-5deg)', Grain:'contrast(1.1) brightness(1.02)', Dust:'sepia(.2) contrast(1.05)', 'Light Leak':'brightness(1.08) saturate(1.2)', Sparkle:'brightness(1.06) saturate(1.1)', Glitter:'brightness(1.05) saturate(1.2)', Snow:'brightness(1.1) contrast(.95)', Bokeh:'brightness(1.05)',
     // Disposable-cam / film-stock looks inspired by Huji, Dazz, Gudak, Kuji, NOMO, CineStill, Lomo, Fuji & Kodak
-    Huji:'sepia(.28) contrast(1.12) saturate(1.28) brightness(1.04) hue-rotate(-6deg)', Gudak:'sepia(.3) saturate(1.5) contrast(1.08) brightness(1.02) hue-rotate(-10deg)', Kuji:'sepia(.16) contrast(1.05) saturate(.92) brightness(1.06) hue-rotate(6deg)', 'Dispo Flash':'contrast(1.24) saturate(1.3) brightness(1.06)', 'Fuji C200':'hue-rotate(-4deg) saturate(1.22) contrast(1.06) brightness(1.02)', CineStill:'hue-rotate(10deg) saturate(1.16) contrast(1.08)', Portra:'sepia(.16) saturate(1.12) contrast(1.02) brightness(1.05)', Lomo:'saturate(1.55) contrast(1.2) brightness(.98)', '1998':'sepia(.34) saturate(1.3) contrast(1.12) hue-rotate(-8deg)', 'Gold 200':'sepia(.32) saturate(1.4) brightness(1.04) hue-rotate(-9deg)'
+    Huji:'sepia(.28) contrast(1.12) saturate(1.28) brightness(1.04) hue-rotate(-6deg)', Gudak:'sepia(.3) saturate(1.5) contrast(1.08) brightness(1.02) hue-rotate(-10deg)', Kuji:'sepia(.16) contrast(1.05) saturate(.92) brightness(1.06) hue-rotate(6deg)', 'Dispo Flash':'contrast(1.24) saturate(1.3) brightness(1.06)', 'Fuji C200':'hue-rotate(-4deg) saturate(1.22) contrast(1.06) brightness(1.02)', CineStill:'hue-rotate(10deg) saturate(1.16) contrast(1.08)', Portra:'sepia(.16) saturate(1.12) contrast(1.02) brightness(1.05)', Lomo:'saturate(1.55) contrast(1.2) brightness(.98)', '1998':'sepia(.34) saturate(1.3) contrast(1.12) hue-rotate(-8deg)', 'Gold 200':'sepia(.32) saturate(1.4) brightness(1.04) hue-rotate(-9deg)',
+    // Instagram-inspired presets
+    Clarendon:'contrast(1.2) saturate(1.35) brightness(1.05) hue-rotate(-6deg)', Juno:'sepia(.18) contrast(1.1) saturate(1.4) brightness(1.02) hue-rotate(-12deg)', Gingham:'sepia(.12) contrast(.9) brightness(1.05) saturate(.85)', Lark:'contrast(.9) brightness(1.08) saturate(1.15) hue-rotate(8deg)', Valencia:'sepia(.22) contrast(1.08) brightness(1.08) saturate(1.2)', 'X-Pro II':'sepia(.3) contrast(1.3) saturate(1.4) brightness(.95)', 'Lo-Fi':'saturate(1.5) contrast(1.4) brightness(.98)', Nashville:'sepia(.3) contrast(1.1) brightness(1.1) saturate(1.3) hue-rotate(-12deg)', Aden:'sepia(.2) contrast(.9) brightness(1.1) saturate(.85) hue-rotate(-18deg)', Reyes:'sepia(.4) contrast(.85) brightness(1.12) saturate(.75)', Hudson:'brightness(1.12) contrast(.9) saturate(1.1) hue-rotate(-12deg)', Sierra:'sepia(.25) contrast(.95) brightness(1.05) saturate(1.1)',
+    // VSCO-inspired presets
+    A6:'sepia(.12) contrast(1.05) brightness(1.04) saturate(.9)', C1:'contrast(1.08) saturate(1.15) brightness(1.03) hue-rotate(-4deg)', M5:'sepia(.08) contrast(.95) brightness(1.05) saturate(.92)', F2:'sepia(.18) contrast(.95) brightness(1.06) saturate(.88)', HB1:'contrast(1.1) brightness(1.08) saturate(1.05)', G3:'grayscale(.3) contrast(1.05) brightness(1.04) saturate(.7)',
+    // Trendy app looks — Tezza / clean-girl / Y2K / foodie
+    'Clean Girl':'contrast(1.06) brightness(1.1) saturate(1.08)', Tezza:'sepia(.22) contrast(1.05) brightness(1.05) saturate(1.1) hue-rotate(-8deg)', 'Moody Film':'sepia(.12) contrast(1.15) brightness(.92) saturate(.85)', Y2K:'saturate(1.6) contrast(1.15) brightness(1.05) hue-rotate(-4deg)', Foodie:'saturate(1.35) contrast(1.05) brightness(1.08)'
   };
 
 
@@ -1159,25 +1177,6 @@ class Component extends DCLogic {
   hujiDate(){ const n=new Date(); const p=x=>('0'+x).slice(-2); return p(n.getDate())+' '+p(n.getMonth()+1)+" '"+String(n.getFullYear()).slice(-2); }
   // Live "DD · MM · YYYY · HH:MM" stamp for the photo-strip date line
   liveDateStr(){ const n=new Date(); const p=x=>('0'+x).slice(-2); return p(n.getDate())+' · '+p(n.getMonth()+1)+' · '+n.getFullYear()+' · '+p(n.getHours())+':'+p(n.getMinutes()); }
-  // Opt-in: detect the user's city via the browser, reverse-geocoded (no API key)
-  detectLoc = ()=>{
-    if(!navigator.geolocation){ alert('Geolocation is not supported on this browser. Type your location instead.'); return; }
-    this.setState({locDetecting:true});
-    navigator.geolocation.getCurrentPosition(async (pos)=>{
-      try{
-        const {latitude:lat, longitude:lon}=pos.coords;
-        const r=await fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage=en');
-        const d=await r.json();
-        const city=d.city||d.locality||d.principalSubdivision||'';
-        const region=d.principalSubdivisionCode ? d.principalSubdivisionCode.split('-').pop() : (d.principalSubdivision||d.countryCode||'');
-        const label=[city,region].filter(Boolean).join(', ')||d.countryName||'My location';
-        this.setState({locText:label, showLoc:true, locDetecting:false});
-      }catch(e){ this.setState({locDetecting:false}); alert('Could not look up your city. Type your location instead.'); }
-    }, (err)=>{
-      this.setState({locDetecting:false});
-      alert(err && err.code===1 ? 'Location permission was blocked. Type your location instead.' : 'Could not get your location. Type it instead.');
-    }, {enableHighAccuracy:false, timeout:8000, maximumAge:600000});
-  };
   playPrintSound(){
     try{
       const ac=new (window.AudioContext||window.webkitAudioContext)();
@@ -1376,11 +1375,9 @@ class Component extends DCLogic {
     }
     // film FX over the full card — matches the live preview where effects sit above the frame
     ctx.save(); this.applyFx(ctx,cardW,cardH); ctx.restore();
-    // caption / date / location text in the bottom margin — matches the live preview
+    // date stamp in the bottom margin — matches the live preview
     { const st=this.state; let ty=top+_pah+46*S; ctx.textAlign='center'; ctx.textBaseline='alphabetic'; ctx.fillStyle=fd.cap||'#8a847b';
-      if(st.showCaption && st.caption){ ctx.font='600 '+(34*S)+'px "Caveat",cursive'; ctx.fillText(st.caption,cardW/2,ty); ty+=36*S; }
-      if(st.showDate){ ctx.save(); ctx.globalAlpha=.7; ctx.font='600 '+(20*S)+'px "Inter",sans-serif'; ctx.fillText(new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),cardW/2,ty); ctx.restore(); ty+=26*S; }
-      if(st.showLoc){ ctx.save(); ctx.globalAlpha=.7; ctx.font='600 '+(20*S)+'px "Inter",sans-serif'; ctx.fillText('📍 '+(st.locText||'New York, NY'),cardW/2,ty); ctx.restore(); } }
+      if(st.showDate){ ctx.save(); ctx.globalAlpha=.7; ctx.font='600 '+(20*S)+'px "Inter",sans-serif'; ctx.fillText(new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),cardW/2,ty); ctx.restore(); ty+=26*S; } }
     ctx.restore(); // end outer rounded-card clip
     return cv;
   }
@@ -1402,18 +1399,57 @@ class Component extends DCLogic {
     a.click();
     document.body.removeChild(a);
   }
+  // ---- Saved gallery (localStorage-backed photo history) ----
+  _persistGallery(gallery){ try{ localStorage.setItem('photoism-gallery', JSON.stringify(gallery)); }catch(e){} }
+  // Build the current composite and store it (as a JPEG dataURL) in the gallery.
+  async saveToGallery(){
+    if(!(this.state.shots||[]).length){ return; }
+    let cv, dataUrl;
+    try { cv = await this.buildComposite(); } catch(e) {}
+    if(cv){ try { dataUrl = cv.toDataURL('image/jpeg',0.82); } catch(e) {
+      try { cv = await this.buildComposite(true); dataUrl = cv.toDataURL('image/jpeg',0.82); } catch(e2) {}
+    }}
+    if(!dataUrl) return;
+    const entry={ id:'g'+Date.now(), src:dataUrl,
+      date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      label:this.state.activeTemplate||'Photo', frame:this.state.selectedFrame||'' };
+    // de-dupe an identical back-to-back save, then cap the history at 24 entries
+    const prev=(this.state.gallery||[]).filter(g=>g.src!==dataUrl);
+    const gallery=[entry,...prev].slice(0,24);
+    this._persistGallery(gallery);
+    this.setState({gallery});
+  }
+  downloadGalleryItem(item){
+    if(!item||!item.src) return;
+    const a=document.createElement('a');
+    a.href=item.src;
+    a.download='photoism-'+((item.label||'photo').toLowerCase().replace(/[^a-z0-9]+/g,'-'))+'.jpg';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+  deleteGalleryItem(id){
+    const gallery=(this.state.gallery||[]).filter(g=>g.id!==id);
+    this._persistGallery(gallery);
+    this.setState({gallery});
+  }
+  clearGallery(){
+    if(!(this.state.gallery||[]).length) return;
+    if(!confirm('Clear all saved photos? This cannot be undone.')) return;
+    this._persistGallery([]);
+    this.setState({gallery:[]});
+  }
   async shareComposite(){
     if(!(this.state.shots||[]).length){ alert('Take a photo first'); return; }
     let cv;
     try { cv = await this.buildComposite(); } catch(e) {}
     if(!cv){ alert('Export failed. Please try again.'); return; }
     let blob;
-    try { blob = await new Promise(r=>cv.toBlob(r,'image/png')); }
-    catch(e) {
-      // Canvas tainted — retry without frame overlay
-      try { cv = await this.buildComposite(true); blob = await new Promise(r=>cv.toBlob(r,'image/png')); }
-      catch(e2) { alert('Share failed. Please try again.'); return; }
+    // toBlob yields null (it does not throw) when the canvas is tainted by the
+    // frame overlay PNG — retry without the overlay in that case.
+    try { blob = await new Promise(r=>cv.toBlob(r,'image/png')); } catch(e) {}
+    if(!blob){
+      try { cv = await this.buildComposite(true); blob = await new Promise(r=>cv.toBlob(r,'image/png')); } catch(e2) {}
     }
+    if(!blob){ alert('Share failed. Please try again.'); return; }
     try{ const file=new File([blob],'photoism-photo.png',{type:'image/png'});
       if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Photoism Photo',text:'My Photoism photo ✨'}); return; }
     }catch(e){ if(e&&e.name==='AbortError'){return;} }
@@ -1526,7 +1562,7 @@ class Component extends DCLogic {
 
   renderVals(){
     const s=this.state, set=(k,v)=>()=>this.setState({[k]:v});
-    const screens=['camera','studio','filters','frames','text','export'];
+    const screens=['camera','studio','filters','frames','text','export','saved'];
     const navBase='display:flex;align-items:center;gap:7px;padding:9px 15px;border:none;border-radius:11px;background:transparent;color:#7a746b;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s;';
     const navActive='background:#fff;color:#2b2724;box-shadow:0 3px 10px rgba(43,39,36,.10);';
     const navStyles={}, go={}, show={};
@@ -1542,6 +1578,10 @@ class Component extends DCLogic {
     const orient={landscape:()=>this.setState({orientation:'landscape'}),portrait:()=>this.setState({orientation:'portrait'})};
     const orientStyles={landscape:segBase+(s.orientation==='landscape'?segOn:''),portrait:segBase+(s.orientation==='portrait'?segOn:'')};
     const camAR=s.orientation==='portrait'?'4/5':'16/10';
+    // medium-size cap for the live camera; narrower in portrait so the tall 4/5 frame stays a sensible height
+    const camColW=s.orientation==='portrait'?'420px':'560px';
+    // medium-size preview panel, consistent across all camera layouts
+    const previewColW='300px';
 
     // camera preview style
     const a=s.adj, fc=this.filterCss[s.selectedFilter]||'';
@@ -1624,6 +1664,9 @@ class Component extends DCLogic {
       {name:'Black & White',items:mkItems(['Noir','Mono','Classic'])},
       {name:'Cinematic',items:mkItems(['Moody','Teal Orange','Golden Hour','Dreamy'])},
       {name:'Disposable & Film',items:mkItems(['Huji','Gudak','Kuji','Dispo Flash','Fuji C200','CineStill','Portra','Lomo','1998','Gold 200'])},
+      {name:'Instagram',items:mkItems(['Clarendon','Juno','Gingham','Lark','Valencia','X-Pro II','Lo-Fi','Nashville','Aden','Reyes','Hudson','Sierra'])},
+      {name:'VSCO',items:mkItems(['A6','C1','M5','F2','HB1','G3'])},
+      {name:'Trendy',items:mkItems(['Clean Girl','Tezza','Moody Film','Y2K','Foodie'])},
       {name:'Fun',items:mkItems(['VHS','Grain','Dust','Light Leak','Sparkle','Glitter','Snow','Bokeh'])}
     ];
 
@@ -1841,12 +1884,6 @@ class Component extends DCLogic {
     const imgOverlayStyle='position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;';
     const isFilm = s.selectedFrame==='Movie Strip' || s.selectedFrame==='Film Strip Vertical';
     const slotRadius = isFilm ? '0' : '12px';
-    const fontMap={handwriting:"'Caveat',cursive",cursive:"'Dancing Script',cursive",typewriter:"'Courier New',monospace",serif:"'Playfair Display',serif",sans:"'Inter',sans-serif"};
-    const fonts=[['handwriting','Handwriting'],['cursive','Cursive'],['typewriter','Typewriter'],['serif','Serif'],['sans','Sans Serif']].map(([k,l])=>({key:k,label:l,
-      onClick:set('font',k),
-      style:'padding:13px 10px;border:1.5px solid '+(s.font===k?'#2b2724':'rgba(43,39,36,.1)')+';border-radius:14px;background:'+(s.font===k?'#2b2724':'#fff')+';color:'+(s.font===k?'#fff':'#5a544c')+';cursor:pointer;font-family:'+fontMap[k]+';font-size:18px;transition:all .18s;'}));
-    const captionStyle={fontFamily:fontMap[s.font],fontSize:s.font==='handwriting'||s.font==='cursive'?'30px':'21px',color:'#2b2724',lineHeight:1.2};
-    const onCaption=(e)=>this.setState({caption:e.target.value});
 
     // gallery
     const grads=['linear-gradient(160deg,#cfd6cf,#e8cfa8 55%,#cf9f6f)','linear-gradient(160deg,#f3c9a0,#d97f5c)','linear-gradient(160deg,#dfe4d6,#8a9a76)','linear-gradient(160deg,#d9d9d9,#5f5f5f)','linear-gradient(160deg,#f3dfe2,#dcb0bb)','linear-gradient(160deg,#d9d2e9,#a99fc9)','linear-gradient(160deg,#efe2b8,#cdb56a)','linear-gradient(160deg,#bcd3e8,#8aa9c9)','linear-gradient(160deg,#e7d5c0,#caa982)','linear-gradient(160deg,#cdbfb0,#8f8275)','linear-gradient(160deg,#f6c6a4,#e88b6f)','linear-gradient(160deg,#cfe0d8,#9fb8ad)'];
@@ -1897,6 +1934,19 @@ class Component extends DCLogic {
 
     const noop=()=>{};
 
+    // ---- Saved gallery (photo history) ----
+    const galleryRaw = s.gallery || [];
+    const galleryCount = galleryRaw.length;
+    const hasGallery = galleryCount > 0;
+    const gallery = galleryRaw.map(g=>({
+      ...g,
+      onDownload:()=>this.downloadGalleryItem(g),
+      onDelete:()=>this.deleteGalleryItem(g.id)
+    }));
+    const onSaved = s.screen==='saved';
+    const savedBtnStyle='display:flex;align-items:center;gap:7px;padding:9px 16px 9px 12px;border:none;border-radius:50px;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s;background:'+(onSaved?'#b07d5e':'#2b2724')+';color:#fff;box-shadow:0 6px 16px '+(onSaved?'rgba(176,125,94,.32)':'rgba(43,39,36,.22)')+';';
+    const galleryBadgeStyle='display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:50px;background:rgba(255,255,255,.25);font-size:11px;font-weight:800;line-height:1;';
+
     // ---- Reviews & ratings (Studio lower section) ----
     const reviewsRaw = s.reviews || [];
     const reviewCount = reviewsRaw.length;
@@ -1935,7 +1985,7 @@ class Component extends DCLogic {
       reviewList, reviewCount, avgLabel, avgStars, ratingStars, ratingHint,
       rvName:s.rvName, rvText:s.rvText, rvDone:s.rvDone, onRvName, onRvText, submitReview,
       hasReviews:reviewCount>0,
-      homeVar, homeVarStyles, orient, orientStyles, camAR, camA:s.homeVariant==='a', camB:s.homeVariant==='b', camC:s.homeVariant==='c',
+      homeVar, homeVarStyles, orient, orientStyles, camAR, camColW, previewColW, camA:s.homeVariant==='a', camB:s.homeVariant==='b', camC:s.homeVariant==='c',
       videoRef:this.setVideoEl, camStyle, camPlaceholderStyle, gridOverlayStyle, flashStyle,
       enableCam:()=>this.startCamera(), camError:s.camError, camErrorText:s.camError||'Allow camera access to go live',
       previewPhotoStyle:{position:'relative',transition:'filter .25s',borderRadius:(isFilm?'0':'10px'),overflow:'hidden'},
@@ -1996,7 +2046,7 @@ class Component extends DCLogic {
       timer:s.timer, timerLabel, hd:s.hd, flashIcon:s.flash?'flash_on':'flash_off', filterLabel:s.selectedFilter,
       toggleTheme:()=>{const nd=!s.dark;try{localStorage.setItem('photoism-dark',nd?'1':'0')}catch(e){}this.setState({dark:nd});}, toggleFullscreen:noop,
       darkClass:s.dark?'dm-on':'', themeIcon:s.dark?'dark_mode':'light_mode',
-      downloadRecent:()=>{ if(!s.lastShot){alert('Take a photo first');return;} this.playPrintSound(); this.setState({printing:true}); },
+      downloadRecent:()=>{ if(!s.lastShot){alert('Take a photo first');return;} this.playPrintSound(); this.setState({printing:true}); this.saveToGallery(); },
       printing:s.printing,
       closePrint:()=>this.setState({printing:false}),
       downloadPrint:()=>{ this.saveComposite(); },
@@ -2004,7 +2054,7 @@ class Component extends DCLogic {
       retake:()=>this.setState({shots:[],lastShot:null,uploadedPhoto:null}),
       refreshRecent:()=>this.setState({lastShot:null}),
       downloadAllZip:()=>alert('Downloading gallery as ZIP'),
-      downloadExport:()=>{ if((s.shots||[]).length||s.uploadedPhoto){ this.playPrintSound(); this.setState({printing:true}); } else { alert('Take or upload a photo first'); } }, showQR:()=>alert('QR code for sharing'),
+      downloadExport:()=>{ if((s.shots||[]).length||s.uploadedPhoto){ this.playPrintSound(); this.setState({printing:true}); this.saveToGallery(); } else { alert('Take or upload a photo first'); } }, showQR:()=>alert('QR code for sharing'),
       shareExport:()=>{ this.shareComposite(); },
       onUpload:(e)=>{ const f=e&&e.target&&e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{ const rawSrc=ev.target.result; this.setState({uploadedPhoto:rawSrc,lastShot:rawSrc,shots:[rawSrc],screen:'camera'}); }; r.readAsDataURL(f); },
       uploadedPhoto:s.uploadedPhoto,
@@ -2025,21 +2075,24 @@ class Component extends DCLogic {
         {icon:'view_day',title:'Strips & Collage',desc:'Single, 2–6 strips, 2–9 grids and 15 aesthetic collage templates.',bg:'rgba(120,170,130,.14)',ic:'#5f9168'},
         {icon:'tune',title:'Filters & Cams',desc:'30 film filters, 6 disposable-cam presets and manual tone + grain controls.',bg:'rgba(201,169,106,.16)',ic:'#b8923f'},
         {icon:'print',title:'Print Animation',desc:'Watch your print roll out of the Photoism machine, complete with sound.',bg:'rgba(176,125,94,.12)',ic:'#b07d5e'},
-        {icon:'edit_note',title:'Text & Captions',desc:'Captions, date and location in 5 handwriting, serif & typewriter fonts.',bg:'rgba(180,140,200,.14)',ic:'#9b6fb3'},
+        {icon:'today',title:'Date Stamp',desc:'Add a clean date stamp to any frame, baked right into your download.',bg:'rgba(180,140,200,.14)',ic:'#9b6fb3'},
         {icon:'download',title:'Export Anywhere',desc:'Save PNG, JPG or WEBP in 6 paper sizes with the frame baked in.',bg:'rgba(120,160,210,.14)',ic:'#5f86b3'}
       ],
       featureTags:[
         {icon:'timer',label:'3 · 5 · 10s Timer'},{icon:'bolt',label:'Flash & Mirror'},{icon:'hd',label:'HD Quality'},
-        {icon:'today',label:'Date & Location'},{icon:'blur_on',label:'Grain & Dust'},{icon:'dark_mode',label:'Dark Mode'},
+        {icon:'today',label:'Date Stamp'},{icon:'blur_on',label:'Grain & Dust'},
         {icon:'zoom_in',label:'Zoom & Grid'},{icon:'upload_file',label:'Upload Photo'},{icon:'camera_roll',label:'Disposable Cams'}
       ],
       frameBg:fdef.css, framePad:isImgFrame?'0':(fdef.pad||'12px 12px 40px'), framePadSm:isImgFrame?'0':(fdef.padSm||'11px 11px 30px'), frameCap:fdef.cap,
       isImgFrame, notImgFrame:!isImgFrame, imgCardStyle, imgWindowStyle, imgPhotoStyle, imgPhotoPlaceholderStyle, imgOverlayStyle, imgFrameSrc, imgPhotoSrc, selectedFrame:s.selectedFrame,
       imgPhotoRef:(el)=>{ if(el&&imgPhotoSrc) el.src=imgPhotoSrc; },
-      imgFrameRef:(el)=>{ if(el&&imgFrameSrc) el.src=imgFrameSrc; }, fonts, captionStyle, caption:s.caption, onCaption, showDate:s.showDate, showLoc:s.showLoc,
-      toggleDate:()=>this.setState({showDate:!s.showDate}), toggleLoc:()=>this.setState({showLoc:!s.showLoc}), toggleCaption:()=>this.setState({showCaption:!s.showCaption}), showCaption:s.showCaption, exportDateStr:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
-      liveDateStr:this.liveDateStr(), locText:s.locText, onLoc:(e)=>this.setState({locText:e.target.value}), detectLoc:this.detectLoc, locDetecting:s.locDetecting, locDetectLabel:s.locDetecting?'Detecting…':'Use my location',
-      photos, photoCount:photos.length, formats, qualities, papers, fmt:s.fmt, quality:s.quality, paper:s.paper
+      imgFrameRef:(el)=>{ if(el&&imgFrameSrc) el.src=imgFrameSrc; }, showDate:s.showDate,
+      toggleDate:()=>this.setState({showDate:!s.showDate}), exportDateStr:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      liveDateStr:this.liveDateStr(),
+      photos, photoCount:photos.length, formats, qualities, papers, fmt:s.fmt, quality:s.quality, paper:s.paper,
+      gallery, hasGallery, galleryEmpty:!hasGallery, galleryCount,
+      galleryCountLabel:galleryCount+(galleryCount===1?' photo':' photos'),
+      savedBtnStyle, galleryBadgeStyle, clearGallery:()=>this.clearGallery()
     };
   }
 }
