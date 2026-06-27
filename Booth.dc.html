@@ -166,7 +166,7 @@
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;"><span style="font-size:14px;font-weight:700;">Preview</span><span style="font-size:11px;font-weight:600;color:#b07d5e;background:rgba(176,125,94,.1);padding:3px 9px;border-radius:50px;">{{ filledCount }} / {{ slotCount }}</span></div>
           <div style="background:{{ frameBg }};padding:{{ framePadSm }};border-radius:5px;box-shadow:0 12px 28px rgba(43,39,36,.13);margin-bottom:12px;position:relative;">
             <div style="{{ tapeStyle }}"></div>
-            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
+            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img sc-attr-src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
             <div style="text-align:center;font-family:'Caveat',cursive;font-size:18px;color:{{ frameCap }};margin-top:9px;">{{ activeTemplate }}</div>
           </div>
           <div style="display:flex;gap:8px;margin-top:14px;">
@@ -200,7 +200,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;"><span style="font-size:14px;font-weight:700;">Preview</span><span style="font-size:11px;font-weight:600;color:#b07d5e;background:rgba(176,125,94,.1);padding:3px 9px;border-radius:50px;">{{ filledCount }} / {{ slotCount }}</span></div>
         <div style="background:{{ frameBg }};padding:{{ framePadSm }};border-radius:5px;box-shadow:0 12px 28px rgba(43,39,36,.13);margin-bottom:12px;position:relative;">
           <div style="{{ tapeStyle }}"></div>
-          <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
+          <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img sc-attr-src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
           <div style="text-align:center;font-family:'Caveat',cursive;font-size:18px;color:{{ frameCap }};margin-top:9px;">{{ activeTemplate }}</div>
         </div>
         <div style="display:flex;gap:8px;">
@@ -235,7 +235,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;"><span style="font-size:14px;font-weight:700;">Preview</span><span style="font-size:11px;font-weight:600;color:#b07d5e;background:rgba(176,125,94,.1);padding:3px 9px;border-radius:50px;">{{ filledCount }} / {{ slotCount }}</span></div>
         <div style="background:{{ frameBg }};padding:{{ framePadSm }};border-radius:5px;box-shadow:0 12px 28px rgba(43,39,36,.13);margin-bottom:12px;position:relative;">
           <div style="{{ tapeStyle }}"></div>
-          <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
+          <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img sc-attr-src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
           <div style="text-align:center;font-family:'Caveat',cursive;font-size:18px;color:{{ frameCap }};margin-top:9px;">{{ activeTemplate }}</div>
         </div>
         <div style="display:flex;gap:8px;">
@@ -615,7 +615,7 @@
         <div style="background:{{ frameBg }};padding:{{ framePad }};border-radius:16px;box-shadow:0 24px 50px rgba(43,39,36,.18);position:relative;transition:background .3s;">
           <div style="{{ tapeStyle }}"></div>
           <div style="{{ previewPhotoStyle }}">
-            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
+            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img sc-attr-src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
             <sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div><div style="{{ hujiStampStyle }}">{{ hujiDateStr }}</div></sc-if>
           </div>
           <div style="padding:8px 4px 0;min-height:20px;text-align:center;">
@@ -763,7 +763,7 @@
         <div style="{{ printCardStyle }}">
           <div style="{{ tapeStyle }}"></div>
           <div style="position:relative;overflow:hidden;border-radius:4px;">
-            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
+            <sc-if value="{{ isImgFrame }}" hint-placeholder-val="{{ false }}"><div style="{{ imgCardStyle }}"><div style="{{ imgWindowStyle }}"><img ref="{{ imgPhotoRef }}" style="{{ imgPhotoStyle }}"><span class="ms" style="{{ imgPhotoPlaceholderStyle }}">photo_camera</span><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div></div><img ref="{{ imgFrameRef }}" style="{{ imgOverlayStyle }}"></div></sc-if><sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ tplFrameStyle }}"><sc-for list="{{ tplSlots }}" as="slot" hint-placeholder-count="0"><div style="{{ slot.style }}"><sc-if value="{{ slot.filled }}" hint-placeholder-val="{{ false }}"><img sc-attr-src="{{ slot.src }}" style="{{ slot.imgStyle }}"></sc-if><span class="ms" style="{{ slot.iconStyle }}">photo_camera</span></div></sc-for></div></sc-if>
             <sc-if value="{{ notImgFrame }}" hint-placeholder-val="{{ true }}"><div style="{{ leakStyle }}"></div><div style="{{ grainStyle }}"></div><div style="{{ vignetteStyle }}"></div><div style="{{ dustStyle }}"></div><div style="{{ hujiStampStyle }}">{{ hujiDateStr }}</div></sc-if>
           </div>
         </div>
@@ -1227,6 +1227,23 @@ class Component extends DCLogic {
       .then(load)
       .catch(()=>load(src)); // fallback to direct load if fetch unavailable
   }
+  // Bake the current colour filter into an image/canvas on a fresh canvas.
+  // Photos are stored RAW (unfiltered) so the selected filter stays live on
+  // both the preview (via CSS) and the download (here). Using a dedicated
+  // full-size canvas for ctx.filter is the cross-browser-reliable way to do
+  // this (Safari mishandles ctx.filter mid-composite).
+  _filterImg(im, fstr){
+    if(!im) return im;
+    if(!fstr || !fstr.trim()) return im;
+    try{
+      const w=im.naturalWidth||im.width, h=im.naturalHeight||im.height;
+      if(!w || !h) return im;
+      const fc=document.createElement('canvas'); fc.width=w; fc.height=h;
+      const fx=fc.getContext('2d');
+      fx.filter=fstr; fx.drawImage(im,0,0); fx.filter='none';
+      return fc;
+    }catch(e){ return im; }
+  }
   async buildComposite(skipOverlay=false){
     const t=this.state.activeTemplate||'', sh=this.state.shots||[];
     let n=1,cols=1,arR=1;
@@ -1269,10 +1286,11 @@ class Component extends DCLogic {
       if(src){
         const im=await this._loadImgSafe(src);
         if(im){
+          const fim=this._filterImg(im,fstr); // apply the live colour filter
           ci.save(); ci.beginPath(); ci.rect(wx,wy,ww,wh); ci.clip();
           const ir=im.width/im.height, cr=ww/wh; let sw2,sh2,sx,sy;
           if(ir>cr){ sh2=im.height; sw2=sh2*cr; sx=(im.width-sw2)/2; sy=0; } else { sw2=im.width; sh2=sw2/cr; sx=0; sy=(im.height-sh2)/2; }
-          ci.drawImage(im,sx,sy,sw2,sh2,wx,wy,ww,wh); // filter baked into shot at capture time
+          ci.drawImage(fim,sx,sy,sw2,sh2,wx,wy,ww,wh);
           ci.restore();
         }
       }
@@ -1333,10 +1351,11 @@ class Component extends DCLogic {
         ctx.save();
         ctx.beginPath();ctx.moveTo(x+R,y);ctx.lineTo(x+cellW-R,y);ctx.arcTo(x+cellW,y,x+cellW,y+R,R);ctx.lineTo(x+cellW,y+cellH-R);ctx.arcTo(x+cellW,y+cellH,x+cellW-R,y+cellH,R);ctx.lineTo(x+R,y+cellH);ctx.arcTo(x,y+cellH,x,y+cellH-R,R);ctx.lineTo(x,y+R);ctx.arcTo(x,y,x+R,y,R);ctx.closePath();
         ctx.clip();
+        const fim=this._filterImg(im,fstr); // apply the live colour filter
         const ir=im.width/im.height, cr=cellW/cellH; let sw,sh2,sx,sy;
         if(ir>cr){ sh2=im.height; sw=sh2*cr; sx=(im.width-sw)/2; sy=0; }
         else { sw=im.width; sh2=sw/cr; sx=0; sy=(im.height-sh2)/2; }
-        ctx.drawImage(im,sx,sy,sw,sh2,x,y,cellW,cellH); // filter baked into shot at capture time
+        ctx.drawImage(fim,sx,sy,sw,sh2,x,y,cellW,cellH);
         const ig=ctx.createLinearGradient(x,y,x,y+cellH*0.18);
         ig.addColorStop(0,'rgba(0,0,0,.10)');ig.addColorStop(1,'rgba(0,0,0,0)');
         ctx.fillStyle=ig;ctx.fillRect(x,y,cellW,cellH*0.18);
@@ -1416,16 +1435,10 @@ class Component extends DCLogic {
     if(this.state.mirror){ctx.translate(canvas.width,0);ctx.scale(-1,1);}
     ctx.drawImage(v,ox,oy,cw,ch,0,0,canvas.width,canvas.height);
     ctx.setTransform(1,0,0,1,0,0);
-    // Bake the colour filter into the stored photo at capture time.
-    // ctx.filter has limited Safari support so doing it here (on a fresh canvas)
-    // is the only guarantee the filter is actually visible in the download.
-    const fstr=this.filterString();
-    let img;
-    if(fstr && fstr.trim()){
-      const fc=document.createElement('canvas'); fc.width=canvas.width; fc.height=canvas.height;
-      const fx=fc.getContext('2d'); fx.filter=fstr; fx.drawImage(canvas,0,0); fx.filter='none';
-      img=fc.toDataURL('image/png');
-    } else { img=canvas.toDataURL('image/png'); }
+    // Store the RAW (unfiltered) photo. The selected colour filter is applied
+    // live on the preview (CSS) and at download time (buildComposite), so the
+    // user can change filters after capture and see it reflected everywhere.
+    const img=canvas.toDataURL('image/png');
     this.setState(st=>({ shots:[img,...(st.shots||[])], lastShot:img }));
   }
 
@@ -1817,9 +1830,12 @@ class Component extends DCLogic {
     const isImgFrame=!!fdef.imgFrame;
     const _iw=fdef.win||{t:8,r:8,b:8,l:8};
     const imgPhotoSrc=s.lastShot||(s.shots&&s.shots[0])||'';
+    // Photos are stored raw; the selected colour filter is applied live here on
+    // the preview (matching what buildComposite bakes into the download).
+    const photoCssFilter=camFilter+(s.dark?' invert(1) hue-rotate(180deg)':'');
     const imgCardStyle='position:relative;width:100%;aspect-ratio:'+(fdef.ar||0.8)+';background:'+(fdef.css||'#fff')+';border-radius:3px;overflow:hidden;';
     const imgWindowStyle='position:absolute;top:'+_iw.t+'%;left:'+_iw.l+'%;right:'+_iw.r+'%;bottom:'+_iw.b+'%;overflow:hidden;background:#e9e4dc;';
-    const imgPhotoStyle='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:'+(imgPhotoSrc?'block':'none')+';';
+    const imgPhotoStyle='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:'+photoCssFilter+';display:'+(imgPhotoSrc?'block':'none')+';';
     const imgPhotoPlaceholderStyle='position:absolute;inset:0;display:'+(imgPhotoSrc?'none':'flex')+';align-items:center;justify-content:center;color:#bcb3a6;font-size:30px;';
     const imgFrameSrc=fdef.imgFrame?fdef.img:'';
     const imgOverlayStyle='position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;';
@@ -1955,7 +1971,7 @@ class Component extends DCLogic {
             style:slotBase,
             filled:!!src,
             src:src||'',
-            imgStyle:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;',
+            imgStyle:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:'+photoCssFilter+';',
             iconStyle:src?'display:none;':'font-size:22px;color:#c9bfb2;'
           };
         });
@@ -1990,7 +2006,7 @@ class Component extends DCLogic {
       downloadAllZip:()=>alert('Downloading gallery as ZIP'),
       downloadExport:()=>{ if((s.shots||[]).length||s.uploadedPhoto){ this.playPrintSound(); this.setState({printing:true}); } else { alert('Take or upload a photo first'); } }, showQR:()=>alert('QR code for sharing'),
       shareExport:()=>{ this.shareComposite(); },
-      onUpload:(e)=>{ const f=e&&e.target&&e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{ const rawSrc=ev.target.result; const im=new Image(); im.onload=()=>{ const fstr=this.filterString(); let src=rawSrc; if(fstr&&fstr.trim()){ const fc=document.createElement('canvas');fc.width=im.width;fc.height=im.height;const fx=fc.getContext('2d');fx.filter=fstr;fx.drawImage(im,0,0);fx.filter='none';src=fc.toDataURL('image/png'); } this.setState({uploadedPhoto:src,lastShot:src,shots:[src],screen:'camera'}); }; im.onerror=()=>this.setState({uploadedPhoto:rawSrc,lastShot:rawSrc,shots:[rawSrc],screen:'camera'}); im.src=rawSrc; }; r.readAsDataURL(f); },
+      onUpload:(e)=>{ const f=e&&e.target&&e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=(ev)=>{ const rawSrc=ev.target.result; this.setState({uploadedPhoto:rawSrc,lastShot:rawSrc,shots:[rawSrc],screen:'camera'}); }; r.readAsDataURL(f); },
       uploadedPhoto:s.uploadedPhoto,
       modeStyles, setMode, cm, cVar, cVarStyles, cShow,
       exportTemplates,

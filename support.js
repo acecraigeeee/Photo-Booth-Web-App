@@ -373,6 +373,11 @@
     for (const { name, value } of [...node.attributes]) {
       if (name === "sc-name" || name === "data-dc-tpl") continue;
       let key = name;
+      // `sc-attr-<name>` binds to the real attribute <name> while keeping the
+      // raw markup free of an attribute the browser's preload scanner would
+      // fetch (e.g. `sc-attr-src="{{ x }}"` avoids a 404 on the literal
+      // "{{ x }}" before hydration). Decoded here back to the real prop name.
+      if (key.startsWith("sc-attr-")) key = key.slice(8);
       if (key.startsWith(CAMEL_ATTR))
         key = kebabToCamel(key.slice(CAMEL_ATTR.length));
       if (key === "hint-size") {

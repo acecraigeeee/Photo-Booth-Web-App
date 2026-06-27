@@ -5,14 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
 <script src="./support.js"></script>
+<!-- Three.js + OrbitControls live in the real <head> (not in <helmet>) so the
+     browser loads/executes them exactly once. Inside <helmet> they would run
+     once during body parse and again when the DC runtime re-injects them,
+     triggering "Multiple instances of Three.js being imported". -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&amp;family=Playfair+Display:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;font-family:'Inter',system-ui,sans-serif;background:#0d0b08;overflow:hidden}
@@ -63,10 +67,22 @@ class Component extends DCLogic {
     const tick = () => {
       if (window.THREE && THREE.OrbitControls) {
         try { this.initScene(); }
-        catch(e){ console.error('initScene failed:', e && e.message, e && e.stack); }
+        catch(e){
+          console.error('initScene failed:', e && e.message, e && e.stack);
+          // WebGL/scene unavailable — clear the loading overlay so the
+          // "Step Inside" button is usable (it falls back to a direct
+          // navigation into the booth when there's no 3D scene).
+          this.setState({ loading:false });
+        }
         return;
       }
-      if (tries++ > 240) return;
+      if (tries++ > 240) {
+        // Three.js never loaded (e.g. CDN blocked) — don't trap the user
+        // on the "Preparing the studio…" screen.
+        console.error('Three.js failed to load — entering booth without the 3D room.');
+        this.setState({ loading:false });
+        return;
+      }
       requestAnimationFrame(tick);
     };
     tick();
